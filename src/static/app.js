@@ -4,6 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  // Activity icons mapping for visual identification
+  const activityIcons = {
+    "Soccer Team": "⚽",
+    "Swimming Club": "🏊",
+    "Drama Club": "🎭",
+    "Art Studio": "🎨",
+    "Debate Team": "💬",
+    "Science Olympiad": "🔬",
+    "Chess Club": "♟️",
+    "Programming Class": "💻",
+    "Gym Class": "🏋️"
+  };
+
   // Function to handle participant deletion
   async function handleDeleteParticipant(event) {
     const button = event.target;
@@ -66,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         activityCard.className = "activity-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
+        const icon = activityIcons[name] || "🎯";
 
         // Build participants list HTML
         let participantsHTML = '';
@@ -82,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .join('');
           participantsHTML = `
             <div class="participants-section">
-              <p><strong>Participants:</strong></p>
+              <p><strong>👥 Participants:</strong></p>
               <ul class="participants-list">
                 ${participantsList}
               </ul>
@@ -91,17 +105,17 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           participantsHTML = `
             <div class="participants-section">
-              <p><strong>Participants:</strong></p>
-              <p class="no-participants">Be the first to sign up!</p>
+              <p><strong>👥 Participants:</strong></p>
+              <p class="no-participants">✨ Be the first to sign up!</p>
             </div>
           `;
         }
 
         activityCard.innerHTML = `
-          <h4>${name}</h4>
+          <h4><span class="activity-icon">${icon}</span>${name}</h4>
           <p>${details.description}</p>
-          <p><strong>Schedule:</strong> ${details.schedule}</p>
-          <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <p><strong>📅 Schedule:</strong> ${details.schedule}</p>
+          <p><strong>📊 Availability:</strong> ${spotsLeft} spots left</p>
           ${participantsHTML}
         `;
 
